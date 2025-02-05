@@ -1,5 +1,6 @@
 import { getAllMedicinas } from "@/lib/data";
-import { CircleX} from "lucide-react";
+import { CircleX, Eye} from "lucide-react";
+import Link from "next/link";
 
 async function MedicinasLista() {
     const medicinas = await getAllMedicinas();
@@ -27,7 +28,9 @@ async function MedicinasLista() {
               <td className="border px-4 py-2">{medicina.nombre}</td>
               <td className="border px-4 py-2">{medicina.via}</td>
               <td className="border px-4 py-2 text-center flex flex-col items-center gap-3">
-                ACCIONES
+              <Link className="flex gap-4  px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-700" href={`/medicinas/${medicina.id}`}>
+                <Eye />
+              </Link>
               </td>
             </tr>
           ))}

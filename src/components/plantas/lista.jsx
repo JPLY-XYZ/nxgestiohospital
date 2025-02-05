@@ -1,5 +1,6 @@
 import { getAllPlantas } from "@/lib/data";
-import { CircleX } from "lucide-react";
+import { CircleX, Eye } from "lucide-react";
+import Link from "next/link";
 
 async function PlantasLista() {
     const plantas = await getAllPlantas();
@@ -25,7 +26,9 @@ async function PlantasLista() {
                             <td className="border px-4 py-2">{planta.nombre}</td>
                             <td className="border px-4 py-2">{planta.jefe_planta}</td>
                             <td className="border px-4 py-2 text-center flex flex-col items-center gap-3">
-                                ACCIONES
+                            <Link className="flex gap-4  px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-700" href={`/plantas/${planta.id}`}>
+                <Eye />
+              </Link>
                             </td>
                         </tr>
                     ))}
