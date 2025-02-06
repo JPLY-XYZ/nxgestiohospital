@@ -1,5 +1,7 @@
+import Modal from "@/components/modal";
+import PlantaInsertar from "@/components/plantas/insertar";
 import PlantasLista from "@/components/plantas/lista";
-import { Home } from "lucide-react";
+import { Home, Plus } from "lucide-react";
 import Link from "next/link";
 import { Suspense } from "react";
 
@@ -14,6 +16,11 @@ function plantas() {
          <Home /> <b>IR AL INICIO</b>
         </Link>
         <h1>LISTA DE PLANTAS</h1> 
+        <Modal openElement={
+          <h1 className="flex gap-4 px-4 py-2 bg-green-500 text-white rounded hover:bg-green-700">AGREGAR PLANTA NUEVA <Plus /></h1>
+          }>
+            <PlantaInsertar />          
+        </Modal>
         <Suspense
           fallback={
             <div className="skeleton h-60 mt-10 w-full text-center">

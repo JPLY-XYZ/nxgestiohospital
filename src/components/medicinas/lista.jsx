@@ -1,6 +1,9 @@
 import { getAllMedicinas } from "@/lib/data";
-import { CircleX, Eye} from "lucide-react";
+import { BadgeX, CircleX, Eye, PencilLine} from "lucide-react";
 import Link from "next/link";
+import MedicinaEliminar from "./eliminar";
+import Modal from "../modal";
+import MedicinaModificar from "./modificar";
 
 async function MedicinasLista() {
     const medicinas = await getAllMedicinas();
@@ -31,6 +34,16 @@ async function MedicinasLista() {
               <Link className="flex gap-4  px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-700" href={`/medicinas/${medicina.id}`}>
                 <Eye />
               </Link>
+              <Modal openElement={
+          <h1 className="flex gap-4 px-4 py-2 bg-red-500 text-white rounded hover:bg-red-700">ELIMINAR <BadgeX /></h1>
+          }>
+            <MedicinaEliminar id={medicina.id} />          
+        </Modal>
+        <Modal openElement={
+          <h1 className="flex gap-4 px-4 py-2 bg-orange-500 text-white rounded hover:bg-orange-700">MODIFICAR <PencilLine /></h1>
+          }>
+            <MedicinaModificar medicina={medicina} />          
+        </Modal>
               </td>
             </tr>
           ))}

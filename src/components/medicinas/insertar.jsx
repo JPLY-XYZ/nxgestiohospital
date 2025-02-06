@@ -12,12 +12,16 @@ function MedicinaInsertar() {
             name="nombre"
             placeholder="Nombre"
           />
-          <input
+          <select
             required
             className="border p-2 rounded w-full text-black"
             name="via"
-            placeholder="Via"
-          />
+          >
+            <option value="">Seleccione una via</option>
+            <option value="oral">Oral</option>
+            <option value="intravenosa">Intravenosa</option>
+            <option value="dermica">Dermica</option>
+          </select>
           <button className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700">
             Insertar
           </button>

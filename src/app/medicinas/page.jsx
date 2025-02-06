@@ -1,5 +1,7 @@
+import MedicinaInsertar from "@/components/medicinas/insertar";
 import MedicinasLista from "@/components/medicinas/lista";
-import { Home } from "lucide-react";
+import Modal from "@/components/modal";
+import { Home, Plus } from "lucide-react";
 import Link from "next/link";
 import { Suspense } from "react";
 
@@ -14,6 +16,13 @@ function medicinas() {
          <Home /> <b>IR AL INICIO</b>
         </Link>
         <h1>LISTA DE MEDICINAS</h1> 
+
+        <Modal openElement={
+          <h1 className="flex gap-4 px-4 py-2 bg-green-500 text-white rounded hover:bg-green-700">AGREGAR MEDICINA NUEVA <Plus /></h1>
+          }>
+            <MedicinaInsertar />          
+        </Modal>
+
         <Suspense
           fallback={
             <div className="skeleton h-60 mt-10  w-full text-center">

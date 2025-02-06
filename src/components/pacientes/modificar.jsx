@@ -1,6 +1,6 @@
 import { modificarPaciente } from "@/lib/actions";
 
-function PacienteModificar({ paciente }) {
+function PacienteModificar({ paciente, plantas }) {
     return (  
       <form
         action={modificarPaciente}

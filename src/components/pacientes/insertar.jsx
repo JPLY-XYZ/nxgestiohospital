@@ -1,6 +1,11 @@
 import { insertarPaciente} from "@/lib/actions";
+import { getAllPlantas } from "@/lib/data";
 
-function PacienteInsertar() {
+async function PacienteInsertar() {
+  
+  const plantas = await getAllPlantas();
+
+
     return ( <form
           action={insertarPaciente}
           className="flex flex-col items-center justify-center mt-5 gap-3 p-5 border rounded shadow-lg"

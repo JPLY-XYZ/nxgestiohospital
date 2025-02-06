@@ -25,7 +25,7 @@ model Paciente {
   nombre          String
   fecha_nacimiento DateTime
   plantaId        Int
-  planta          Planta     @relation(fields: [plantaId], references: [id])
+  planta          Planta     @relation(fields: [plantaId], references: [id], onDelete: Cascade)
   medicinas       Medicina[]
 }
 
@@ -39,5 +39,5 @@ model Medicina {
 enum Via {
   oral
   intravenosa
-  dérmica
+  dermica
 }

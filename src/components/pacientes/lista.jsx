@@ -1,9 +1,13 @@
-import { getAllPacientes } from "@/lib/data";
-import { CircleX, Eye } from "lucide-react";
+import { getAllPacientes, getAllPlantas } from "@/lib/data";
+import { BadgeX, CircleX, Eye, PencilLine } from "lucide-react";
 import Link from "next/link";
+import Modal from "../modal";
+import PacienteEliminar from "./eliminar";
+import PacienteModificar from "./modificar";
 
 async function PacientesLista() {
   const pacientes = await getAllPacientes();
+  const plantas = await getAllPlantas();
 
   return (
     <>
@@ -14,6 +18,7 @@ async function PacientesLista() {
           <tr>
             <th className="px-4 py-2 border">Nombre</th>
             <th className="px-4 py-2 border">Fecha de Nacimiento</th>
+            <th className="px-4 py-2 border">Planta</th>
             <th className="px-4 py-2 border">Acciones</th>
           </tr>
         </thead>
@@ -27,6 +32,9 @@ async function PacientesLista() {
               <td className="border px-4 py-2">
                 {paciente.fecha_nacimiento.toISOString().split("T")[0]}
               </td>
+              <td className="border px-4 py-2">
+                {paciente.plantaId && plantas.find((planta) => planta.id === paciente.plantaId).nombre}
+              </td>
               <td className="border px-4 py-2 text-center flex flex-col items-center gap-3">
                 <Link
                   className="flex gap-4  px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-700"
@@ -34,6 +42,16 @@ async function PacientesLista() {
                 >
                   <Eye />
                 </Link>
+                <Modal openElement={
+          <h1 className="flex gap-4 px-4 py-2 bg-red-500 text-white rounded hover:bg-red-700">ELIMINAR <BadgeX /></h1>
+          }>
+            <PacienteEliminar id={paciente.id} />          
+        </Modal>
+        <Modal openElement={
+          <h1 className="flex gap-4 px-4 py-2 bg-orange-500 text-white rounded hover:bg-orange-700">MODIFICAR <PencilLine /></h1>
+          }>
+            <PacienteModificar paciente={paciente} plantas={plantas} />          
+        </Modal>
               </td>
             </tr>
           ))}

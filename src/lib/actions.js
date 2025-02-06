@@ -1,4 +1,4 @@
-
+'use server'
 // PLANTAS
 
 import { revalidatePath } from "next/cache";

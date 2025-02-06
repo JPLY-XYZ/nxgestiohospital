@@ -14,13 +14,17 @@ function MedicinaModificar({ medicina }) {
           name="nombre"
           defaultValue={medicina.nombre}
         />
-        <input
+        <select
           required
           className="border p-2 rounded w-full text-black"
           name="via"
           defaultValue={medicina.via}
-        />
-        <button className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700">
+        >
+          <option value="oral">Oral</option>
+          <option value="intravenosa">Intravenosa</option>
+          <option value="dermica">Dérmica</option>
+        </select>
+        <button className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-700">
           Modificar
         </button>
       </form>
