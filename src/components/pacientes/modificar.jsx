@@ -21,6 +21,8 @@ function PacienteModificar({ paciente, plantas }) {
           type="date"
           defaultValue={new Date(paciente.fecha_nacimiento).toISOString().split('T')[0]}
         />
+
+        {/* SE HABIA HECHO EN EL EJERCICIO PREVIO */}
         <select
           required
           className="border p-2 rounded w-full text-black"

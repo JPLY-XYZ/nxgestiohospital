@@ -24,6 +24,7 @@ async function PacienteInsertar() {
             type="date"
             placeholder="Fecha de Nacimiento"
           />
+          {/* SE HABIA HECHO EN EL EJERCICIO PREVIO */}
           <select
             required
             className="border p-2 rounded w-full text-black"
