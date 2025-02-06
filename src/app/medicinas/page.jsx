@@ -1,11 +1,13 @@
 import MedicinaInsertar from "@/components/medicinas/insertar";
 import MedicinasLista from "@/components/medicinas/lista";
 import Modal from "@/components/modal";
+import { getAllPacientes } from "@/lib/data";
 import { Home, Plus } from "lucide-react";
 import Link from "next/link";
 import { Suspense } from "react";
 
-function medicinas() {
+async function medicinas() {
+  const pacientes = await getAllPacientes();
   return (
     <>
       <div className="flex flex-col items-center justify-center mt-5">
@@ -20,7 +22,7 @@ function medicinas() {
         <Modal openElement={
           <h1 className="flex gap-4 px-4 py-2 bg-green-500 text-white rounded hover:bg-green-700">AGREGAR MEDICINA NUEVA <Plus /></h1>
           }>
-            <MedicinaInsertar />          
+            <MedicinaInsertar pacientes={pacientes} />          
         </Modal>
 
         <Suspense

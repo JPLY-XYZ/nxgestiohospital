@@ -66,7 +66,7 @@ async function eliminarPaciente(formData) {
 
 // MEDICINAS
 
-async function insertarMedicina(formData) {
+async function insertarMedicina(prevState,formData) {
 
     const pacientesID = await prisma.paciente.findMany( {select: { id: true }} )
     const connect = pacientesID.filter(e => formData.get(`paciente${e.id}`) !== null)
@@ -79,9 +79,10 @@ async function insertarMedicina(formData) {
         }
     });
     revalidatePath('/medicinas');
+    return { success: 'La medicina se inserto correctamente' }
 }
 
-async function modificarMedicina(formData) {
+async function modificarMedicina(prevState, formData) {
 
     const pacientesID = await prisma.paciente.findMany( {select: { id: true }} )
 
@@ -100,13 +101,16 @@ async function modificarMedicina(formData) {
         }
     });
     revalidatePath('/medicinas/' + +formData.get('id'));
+    return { success: 'La medicina se modifico correctamente' }
 }
 
-async function eliminarMedicina(formData) {
+async function eliminarMedicina(prevState,formData) {
     await prisma.medicina.delete({
         where: { id: +formData.get('id') }
     });
+    
     revalidatePath('/medicinas');
+    return { success: 'La medicina se elimino correctamente' }
 }
 
 export { insertarPlanta, modificarPlanta, eliminarPlanta, insertarPaciente, modificarPaciente, eliminarPaciente, insertarMedicina, modificarMedicina, eliminarMedicina };
