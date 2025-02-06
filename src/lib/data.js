@@ -26,12 +26,16 @@ async function getPacienteById(id) {
 
 // Consultas para MEDICINA
 async function getAllMedicinas() {
-    return await prisma.medicina.findMany();
+    return await prisma.medicina.findMany({
+        include: { pacientes: true }
+    });
+    
 }
 
 async function getMedicinaById(id) {
     return await prisma.medicina.findUnique({
-        where: { id: Number(id) }
+        where: { id: Number(id) },
+        include: { pacientes: true }
     });
 }
 

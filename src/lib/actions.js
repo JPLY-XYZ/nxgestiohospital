@@ -67,21 +67,36 @@ async function eliminarPaciente(formData) {
 // MEDICINAS
 
 async function insertarMedicina(formData) {
+
+    const pacientesID = await prisma.paciente.findMany( {select: { id: true }} )
+    const connect = pacientesID.filter(e => formData.get(`paciente${e.id}`) !== null)
+    
     await prisma.medicina.create({
         data: {
             nombre: formData.get('nombre'),
-            via: formData.get('via')
+            via: formData.get('via'),
+            pacientes: { connect }
         }
     });
     revalidatePath('/medicinas');
 }
 
 async function modificarMedicina(formData) {
+
+    const pacientesID = await prisma.paciente.findMany( {select: { id: true }} )
+
+    const connect = pacientesID.filter(e => formData.get(`paciente${e.id}`) !== null)
+    const disconnect = pacientesID.filter(e => formData.get(`paciente${e.id}`) === null)
+
     await prisma.medicina.update({
         where: { id: +formData.get('id') },
         data: {
             nombre: formData.get('nombre'),
-            via: formData.get('via')
+            via: formData.get('via'),
+            pacientes: { 
+                connect,
+                disconnect
+             }
         }
     });
     revalidatePath('/medicinas/' + +formData.get('id'));

@@ -1,6 +1,14 @@
 import { modificarMedicina } from "@/lib/actions";
+import { getAllPacientes } from "@/lib/data";
 
-function MedicinaModificar({ medicina }) {
+async function MedicinaModificar({ medicina }) {
+  const pacientes = await getAllPacientes()
+
+  console.log(medicina)
+
+  const IDs = medicina.pacientes?.map(e => e.id)
+  console.log(IDs)
+  
     return (  
       <form
         action={modificarMedicina}
@@ -24,6 +32,21 @@ function MedicinaModificar({ medicina }) {
           <option value="intravenosa">Intravenosa</option>
           <option value="dermica">Dérmica</option>
         </select>
+
+        {
+                pacientes.map(paciente =>
+                    <label key={paciente.id}>
+                        <input
+                            type="checkbox"
+                            name={`paciente${paciente.id}`} // ID del Estudiante
+                            value={paciente.nombre} 
+                            defaultChecked={IDs?.includes(paciente.id)}/>
+
+                        {paciente.nombre}
+
+                    </label>
+                )
+            }
         <button className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-700">
           Modificar
         </button>
