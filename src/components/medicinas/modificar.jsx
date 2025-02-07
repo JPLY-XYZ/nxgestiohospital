@@ -1,17 +1,31 @@
+'use client'
 import { modificarMedicina } from "@/lib/actions";
-import { getAllPacientes } from "@/lib/data";
+import { useActionState, useEffect, useId } from "react";
+import { toast } from "sonner";
 
-async function MedicinaModificar({ medicina }) {
-  const pacientes = await getAllPacientes()
+ function MedicinaModificar({ medicina,pacientes }) {
+ 
 
-  console.log(medicina)
 
   const IDs = medicina.pacientes?.map(e => e.id)
   console.log(IDs)
+
+
+  
+  const formId = useId();
+
+  const [state, action, pending] = useActionState(modificarMedicina, {});
+
+  useEffect(() => {
+    if (state.success) {
+      toast.success(state.success);
+      document.getElementById(formId).closest('dialog')?.close() 
+    }
+  }, [state]);
   
     return (  
       <form
-        action={modificarMedicina}
+        action={action} id={formId}
         className="flex flex-col items-center justify-center mt-5 gap-3 p-5 border rounded shadow-lg"
       >
         <fieldset>EDITAR MEDICINA</fieldset>

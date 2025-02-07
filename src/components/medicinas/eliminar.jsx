@@ -2,10 +2,12 @@
 
 import { eliminarMedicina } from "@/lib/actions";
 import { Trash2 } from "lucide-react";
+import { useRouter } from "next/navigation";
 import { useActionState, useEffect, useId } from "react";
 import { toast } from "sonner";
 
 function MedicinaEliminar({id}) {
+  const { refresh } = useRouter()
   const formId = useId();
 
   const [state, action, pending] = useActionState(eliminarMedicina, {});
@@ -13,7 +15,8 @@ function MedicinaEliminar({id}) {
   useEffect(() => {
     if (state.success) {
       toast.success(state.success);
-      document.getElementById(formId)?.closest('dialog')?.close();
+      refresh()     
+      document.getElementById(formId).closest('dialog')?.close() 
     }
   }, [state]);
 

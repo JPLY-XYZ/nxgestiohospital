@@ -1,13 +1,23 @@
+'use client'
 import { insertarPaciente} from "@/lib/actions";
-import { getAllPlantas } from "@/lib/data";
+import { useActionState, useEffect, useId } from "react";
+import { toast } from "sonner"
 
-async function PacienteInsertar() {
-  
-  const plantas = await getAllPlantas();
+function PacienteInsertar({plantas}) {
+ 
+  const formId = useId();
 
+  const [state, action, pending] = useActionState(insertarPaciente, {});
+
+  useEffect(() => {
+    if (state.success) {
+      toast.success(state.success);
+      document.getElementById(formId).closest('dialog')?.close() 
+    }
+  }, [state]);
 
     return ( <form
-          action={insertarPaciente}
+          action={action} id={formId}
           className="flex flex-col items-center justify-center mt-5 gap-3 p-5 border rounded shadow-lg"
         >
           <fieldset>AÑADIR NUEVO PACIENTE</fieldset>

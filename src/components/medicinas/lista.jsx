@@ -1,4 +1,4 @@
-import { getAllMedicinas } from "@/lib/data";
+import { getAllMedicinas, getAllPacientes } from "@/lib/data";
 import { BadgeX, CircleX, Eye, PencilLine} from "lucide-react";
 import Link from "next/link";
 import MedicinaEliminar from "./eliminar";
@@ -7,7 +7,7 @@ import MedicinaModificar from "./modificar";
 
 async function MedicinasLista() {
     const medicinas = await getAllMedicinas();
-
+    const pacientes = await getAllPacientes()
   return (
     <>
       <h1 className="text-3xl font-bold mt-10">LISTA DE MEDICINAS</h1>
@@ -42,7 +42,7 @@ async function MedicinasLista() {
         <Modal openElement={
           <h1 className="flex gap-4 px-4 py-2 bg-orange-500 text-white rounded hover:bg-orange-700">MODIFICAR <PencilLine /></h1>
           }>
-            <MedicinaModificar medicina={medicina} />          
+            <MedicinaModificar medicina={medicina} pacientes={pacientes} />          
         </Modal>
               </td>
             </tr>

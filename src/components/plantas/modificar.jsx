@@ -1,9 +1,24 @@
+'use client'
 import { modificarPlanta } from "@/lib/actions";
+import { useActionState, useEffect, useId } from "react";
+import { toast } from "sonner";
 
 function PlantaModificar({ planta }) {
+
+  const formId = useId();
+
+  const [state, action, pending] = useActionState(modificarPlanta, {});
+
+  useEffect(() => {
+    if (state.success) {
+      toast.success(state.success);
+      document.getElementById(formId).closest('dialog')?.close() 
+    }
+  }, [state]);
+
     return (  
       <form
-        action={modificarPlanta}
+        action={action} id={formId}	
         className="flex flex-col items-center justify-center mt-5 gap-3 p-5 border rounded shadow-lg"
       >
         <fieldset>EDITAR PLANTA</fieldset>
