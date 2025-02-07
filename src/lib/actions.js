@@ -105,7 +105,9 @@ async function modificarMedicina(prevState, formData) {
         }
     });
     revalidatePath('/medicinas/');
-    return { success: 'La medicina se modifico correctamente' }
+    return { success: 'La medicina se modifico correctamente' } 
+
+    
 }
 
 async function eliminarMedicina(prevState,formData) {
